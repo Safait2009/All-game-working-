@@ -3,71 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WINGO REAL-TIME SYNC</title>
+    <title>WINGO 1-MIN VIP - SAFAIT</title>
     <style>
-        :root { --gold: #ffcc00; --bg: #050505; --neon: #00ff00; }
-        body { background: var(--bg); color: #fff; font-family: 'Arial', sans-serif; text-align: center; margin: 0; padding: 20px; }
-        .sync-panel { border: 2px solid var(--gold); border-radius: 20px; padding: 25px; background: #111; max-width: 360px; margin: auto; box-shadow: 0 0 30px rgba(255, 204, 0, 0.2); }
-        #timer { font-size: 14px; color: var(--gold); margin-bottom: 10px; font-family: monospace; }
-        #res-box { background: #000; border-radius: 15px; padding: 30px; margin: 20px 0; border: 1px solid #333; }
-        #prediction { font-size: 50px; font-weight: 900; color: var(--neon); text-shadow: 0 0 15px var(--neon); }
-        #number { font-size: 20px; color: #aaa; margin-top: 10px; }
-        .live-dot { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+        :root { --gold: #ffcc00; --bg: #000; --neon: #00ff41; }
+        body { background: var(--bg); color: #fff; font-family: 'Arial', sans-serif; text-align: center; padding: 15px; }
+        .panel { border: 2px solid var(--gold); border-radius: 20px; padding: 25px; background: #0d0d0d; max-width: 380px; margin: auto; box-shadow: 0 0 30px rgba(255, 204, 0, 0.3); }
+        #clock { font-size: 20px; color: var(--gold); font-weight: bold; background: #1a1a1a; padding: 10px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #333; }
+        .result-display { background: #000; border: 1px dashed var(--neon); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        #main-res { font-size: 55px; font-weight: 900; color: var(--neon); text-shadow: 0 0 20px var(--neon); margin: 0; }
+        #sub-res { font-size: 18px; color: #aaa; margin-top: 10px; font-weight: bold; }
+        .number-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 15px; }
+        .num-circle { width: 35px; height: 35px; line-height: 35px; border-radius: 50%; background: #222; font-size: 14px; border: 1px solid #444; color: #555; }
+        .win-num { background: var(--gold) !important; color: #000 !important; font-weight: bold; border-color: #fff; box-shadow: 0 0 10px var(--gold); }
+        .hint { font-size: 12px; color: #ff003c; margin-top: 15px; font-weight: bold; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
     </style>
 </head>
 <body>
 
-<div class="sync-panel">
-    <div class="live-dot"></div> <span style="font-size: 12px; color: red;">LIVE SERVER SYNC</span>
-    <div id="timer">CLOCK: 00:00:00</div>
-    
-    <div id="res-box">
-        <div style="font-size: 12px; color: #555;">NEXT PREDICTION</div>
-        <div id="prediction">WAITING</div>
-        <div id="number">NUMBER: --</div>
+<div class="panel">
+    <div style="font-size: 12px; color: #888; margin-bottom: 5px;">LIVE DEVICE TIME</div>
+    <div id="clock">00:00:00</div>
+
+    <div class="result-display">
+        <div style="font-size: 11px; color: #555; letter-spacing: 2px;">PREDICTED SIZE</div>
+        <p id="main-res">WAIT</p>
+        <p id="sub-res">SYNCING DATA...</p>
+        
+        <div style="font-size: 11px; color: #555; margin-top: 15px;">HOT NUMBERS</div>
+        <div class="number-grid" id="num-grid">
+            <div class="num-circle" id="n0">0</div><div class="num-circle" id="n1">1</div><div class="num-circle" id="n2">2</div><div class="num-circle" id="n3">3</div><div class="num-circle" id="n4">4</div>
+            <div class="num-circle" id="n5">5</div><div class="num-circle" id="n6">6</div><div class="num-circle" id="n7">7</div><div class="num-circle" id="n8">8</div><div class="num-circle" id="n9">9</div>
+        </div>
     </div>
 
-    <div style="font-size: 13px; color: var(--gold); background: rgba(255,204,0,0.1); padding: 10px; border-radius: 8px;">
-        <strong>নির্ধারিত সময়:</strong> প্রতি ৩০ বা ৬০ সেকেন্ডে গেমের সাথে মিলিয়ে বাজি ধরুন।
-    </div>
-    
-    <p style="font-size: 10px; color: #444; margin-top: 15px;">DEVELOPER SAFAIT | SYNC ID: 2009</p>
+    <div class="hint" id="status-hint">WAITING FOR NEXT MINUTE...</div>
+    <div style="font-size: 10px; color: #333; margin-top: 20px;">ID: SAFAIT-2009-PRO-1MIN</div>
 </div>
 
 <script>
-    function updateClock() {
+    function updateEngine() {
         const now = new Date();
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        document.getElementById('timer').innerText = `CLOCK: ${h}:${m}:${s}`;
+        const s = now.getSeconds();
+        const m = now.getMinutes();
+        document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
 
-        // প্রতি ১ মিনিটে গেমের রাউন্ড শুরু হয় (যেমন ৬০ সেকেন্ড পর পর)
-        // আমরা প্রতি ৩০ সেকেন্ডে প্রেডিকশন রিফ্রেশ করব মোবাইল সময়ের সাথে মিলিয়ে
-        if (s == "00" || s == "30") {
-            generateSignal(s, m);
+        // ১ মিনিটের গেম যেহেতু, প্রতি ৬০ সেকেন্ড পর পর বড় আপডেট হবে
+        // কিন্তু আমরা ১০ সেকেন্ড আগে (যেমন ৫০ সেকেন্ডে) সিগনাল দিয়ে দেব
+        if (s >= 0 && s <= 5) {
+            calculateLogic(m, s);
+            document.getElementById('status-hint').innerText = "NEW ROUND STARTED! BET NOW";
+        } else if (s > 45 && s < 50) {
+            document.getElementById('status-hint').innerText = "ANALYZING NEXT ROUND...";
+        } else if (s >= 50) {
+            document.getElementById('status-hint').innerText = "PREDICTION READY! CHECK ABOVE";
+            calculateLogic(m+1, s);
         }
     }
 
-    function generateSignal(sec, min) {
-        const pred = document.getElementById('prediction');
-        const numDisp = document.getElementById('number');
+    function calculateLogic(minute, second) {
+        const main = document.getElementById('main-res');
+        const sub = document.getElementById('sub-res');
         
-        // আপনার পাসওয়ার্ড ২০০৯ এবং মোবাইলের মিনিট/সেকেন্ড ব্যবহার করে লজিক
-        let seed = parseInt(sec) + parseInt(min) + 2009;
-        let num = seed % 10;
-        let result = (num <= 4) ? "SMALL" : "BIG";
+        // ২০০৯ সিক্রেট কি + মিনিট + সেকেন্ড লজিক
+        let seed = (minute * 60) + 2009;
+        let winNum = seed % 10;
+        let size = (winNum >= 5) ? "BIG" : "SMALL";
+        let color = (winNum % 2 === 0) ? "RED" : "GREEN";
+        if(winNum === 0 || winNum === 5) color = "VIOLET MIX";
 
-        pred.innerText = result;
-        pred.style.color = (result === "BIG") ? "#00ff00" : "#ffcc00";
-        numDisp.innerText = "ACCURATE NUMBER: " + num;
-        
-        // ভাইব্রেট করবে যাতে আপনি বুঝতে পারেন নতুন রেজাল্ট আসছে
-        if (navigator.vibrate) navigator.vibrate(200);
+        main.innerText = size;
+        main.style.color = (size === "BIG") ? "#00ff41" : "#ffcc00";
+        sub.innerText = "COLOR: " + color;
+
+        // নম্বর গ্রিড আপডেট
+        document.querySelectorAll('.num-circle').forEach(el => el.classList.remove('win-num'));
+        document.getElementById('n' + winNum).classList.add('win-num');
     }
 
-    setInterval(updateClock, 1000);
+    setInterval(updateEngine, 1000);
 </script>
 </body>
 </html>
