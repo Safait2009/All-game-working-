@@ -3,70 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFAIT RECOVERY V2025</title>
+    <title>WINGO VIP - SAFAIT</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; }
-        .box { border: 5px solid #ff0000; border-radius: 20px; padding: 20px; max-width: 350px; margin: 50px auto; background: #111; box-shadow: 0 0 40px #ff0000; }
-        .win-display { font-size: 50px; font-weight: bold; color: #00ff00; margin: 20px 0; border: 2px solid #333; padding: 20px; border-radius: 10px; }
-        .btn { background: #ff0000; color: #fff; border: none; padding: 15px 30px; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 50px; width: 100%; box-shadow: 0 5px 0 #880000; }
-        .btn:active { transform: translateY(5px); box-shadow: none; }
-        .type-selector { display: flex; justify-content: space-around; margin-bottom: 20px; }
-        .type-selector span { cursor: pointer; padding: 5px 10px; border: 1px solid #444; border-radius: 5px; font-size: 12px; }
-        .selected { background: #00ff00; color: #000; }
+        :root { --gold: #ffcc00; --bg: #0b0b0b; --text: #fff; --green: #00ff00; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 10px; }
+        .wingo-panel { border: 2px solid var(--gold); border-radius: 20px; padding: 25px; background: #111; max-width: 360px; margin: 30px auto; box-shadow: 0 0 35px rgba(255, 204, 0, 0.2); }
+        .header { font-size: 20px; font-weight: bold; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        #display-box { background: #000; border: 1px solid #333; border-radius: 15px; padding: 30px 10px; margin-bottom: 20px; }
+        #res-text { font-size: 50px; font-weight: 900; margin: 0; color: var(--green); text-shadow: 0 0 15px var(--green); }
+        #res-num { font-size: 22px; color: #fff; margin-top: 10px; letter-spacing: 2px; }
+        .color-dot { width: 20px; height: 20px; border-radius: 50%; display: inline-block; margin-top: 5px; }
+        .btn-win { background: var(--gold); color: #000; border: none; padding: 18px; width: 100%; border-radius: 12px; font-size: 18px; font-weight: 900; cursor: pointer; transition: 0.2s; }
+        .btn-win:active { transform: scale(0.97); }
+        .loading { font-size: 11px; color: #555; margin-bottom: 10px; height: 15px; }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <h2 style="color: #ff0000; margin-top: 0;">SAFAIT RECOVERY MODE</h2>
-    
-    <div class="type-selector">
-        <span id="t1" class="selected" onclick="select('AVIATOR')">AVIATOR</span>
-        <span id="t2" onclick="select('WINGO')">WINGO</span>
-        <span id="t3" onclick="select('CRAZY')">CRAZY.T</span>
+<div class="wingo-panel">
+    <div class="header">WINGO PRO SYNC</div>
+    <div style="font-size: 10px; color: #444; margin-bottom: 10px;">ID: SAFAIT-2009-WIN</div>
+
+    <div id="display-box">
+        <div id="load" class="loading">SYSTEM READY</div>
+        <p id="res-text">READY</p>
+        <p id="res-num">NO. --</p>
+        <div id="dot" class="color-dot" style="background: transparent;"></div>
     </div>
 
-    <div id="status" style="font-size: 10px; color: #888;">SERVER: CONNECTED (2009)</div>
-    <div id="result" class="win-display">READY</div>
-    <div id="advice" style="font-size: 14px; color: #ffcc00; margin-bottom: 15px;">WAIT FOR SIGNAL</div>
+    <button class="btn-win" onclick="getWingo()">GET 99% SIGNAL</button>
 
-    <button class="btn" onclick="crackServer()">HACK NEXT ROUND</button>
-    
-    <p style="font-size: 11px; margin-top: 20px; color: #444;">ID: SAFAIT_DEVELOPER_V2025</p>
+    <div style="margin-top: 20px; font-size: 12px;">
+        <span style="color: #ffcc00;">● TREND: STABLE</span> | 
+        <span style="color: #00ff00;">● SYNC: ACTIVE</span>
+    </div>
 </div>
 
 <script>
-    let mode = 'AVIATOR';
-    function select(m) {
-        mode = m;
-        document.querySelectorAll('.type-selector span').forEach(s => s.classList.remove('selected'));
-        if(m==='AVIATOR') document.getElementById('t1').classList.add('selected');
-        if(m==='WINGO') document.getElementById('t2').classList.add('selected');
-        if(m==='CRAZY') document.getElementById('t3').classList.add('selected');
-        document.getElementById('result').innerText = "READY";
-    }
+    function getWingo() {
+        const resText = document.getElementById('res-text');
+        const resNum = document.getElementById('res-num');
+        const load = document.getElementById('load');
+        const dot = document.getElementById('dot');
 
-    function crackServer() {
-        const res = document.getElementById('result');
-        const adv = document.getElementById('advice');
-        res.innerText = "CHORING...";
-        
+        load.innerText = "CRACKING SERVER PACKET...";
+        resText.innerText = "...";
+        resNum.innerText = "CALCULATING";
+
         setTimeout(() => {
-            let r = Math.random() * 100;
-            if(mode === 'AVIATOR') {
-                let v = (r < 50) ? (1.30 + (r/100)).toFixed(2) : (2.00 + (r/20)).toFixed(2);
-                res.innerText = v + "x";
-                adv.innerText = "CASH OUT: 1.40x (MUST)";
-            } else if(mode === 'WINGO') {
-                let s = (r < 50) ? "BIG" : "SMALL";
-                res.innerText = s;
-                adv.innerText = "FOLLOW TREND: 1x, 3x, 9x";
-            } else if(mode === 'CRAZY') {
-                let c = ["1", "2", "5", "10", "BONUS"][Math.floor(r % 5)];
-                res.innerText = c;
-                adv.innerText = "WAIT FOR STABLE WHEEL";
-            }
-        }, 1500);
+            let rand = Math.floor(Math.random() * 100);
+            let num = Math.floor(Math.random() * 10);
+            let bigSmall = (num <= 4) ? "SMALL" : "BIG";
+            let color = (num % 2 === 0) ? "RED" : "GREEN";
+            if(num === 0) color = "RED-VIOLET";
+            if(num === 5) color = "GREEN-VIOLET";
+
+            load.innerText = "SIGNAL SECURED (9/10 ACCURACY)";
+            resText.innerText = bigSmall;
+            resNum.innerText = "NUMBER: " + num;
+            
+            // UI Updates
+            resText.style.color = (bigSmall === "BIG") ? "#00ff00" : "#ffcc00";
+            dot.style.background = (color.includes("RED")) ? "red" : "green";
+            if(color.includes("VIOLET")) dot.style.border = "3px solid violet"; else dot.style.border = "none";
+            
+        }, 1200);
     }
 </script>
 </body>
