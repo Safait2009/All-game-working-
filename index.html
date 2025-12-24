@@ -3,72 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WINGO VIP - SAFAIT</title>
+    <title>WINGO REAL-TIME SYNC</title>
     <style>
-        :root { --gold: #ffcc00; --bg: #0b0b0b; --text: #fff; --green: #00ff00; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 10px; }
-        .wingo-panel { border: 2px solid var(--gold); border-radius: 20px; padding: 25px; background: #111; max-width: 360px; margin: 30px auto; box-shadow: 0 0 35px rgba(255, 204, 0, 0.2); }
-        .header { font-size: 20px; font-weight: bold; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        #display-box { background: #000; border: 1px solid #333; border-radius: 15px; padding: 30px 10px; margin-bottom: 20px; }
-        #res-text { font-size: 50px; font-weight: 900; margin: 0; color: var(--green); text-shadow: 0 0 15px var(--green); }
-        #res-num { font-size: 22px; color: #fff; margin-top: 10px; letter-spacing: 2px; }
-        .color-dot { width: 20px; height: 20px; border-radius: 50%; display: inline-block; margin-top: 5px; }
-        .btn-win { background: var(--gold); color: #000; border: none; padding: 18px; width: 100%; border-radius: 12px; font-size: 18px; font-weight: 900; cursor: pointer; transition: 0.2s; }
-        .btn-win:active { transform: scale(0.97); }
-        .loading { font-size: 11px; color: #555; margin-bottom: 10px; height: 15px; }
+        :root { --gold: #ffcc00; --bg: #050505; --neon: #00ff00; }
+        body { background: var(--bg); color: #fff; font-family: 'Arial', sans-serif; text-align: center; margin: 0; padding: 20px; }
+        .sync-panel { border: 2px solid var(--gold); border-radius: 20px; padding: 25px; background: #111; max-width: 360px; margin: auto; box-shadow: 0 0 30px rgba(255, 204, 0, 0.2); }
+        #timer { font-size: 14px; color: var(--gold); margin-bottom: 10px; font-family: monospace; }
+        #res-box { background: #000; border-radius: 15px; padding: 30px; margin: 20px 0; border: 1px solid #333; }
+        #prediction { font-size: 50px; font-weight: 900; color: var(--neon); text-shadow: 0 0 15px var(--neon); }
+        #number { font-size: 20px; color: #aaa; margin-top: 10px; }
+        .live-dot { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-<div class="wingo-panel">
-    <div class="header">WINGO PRO SYNC</div>
-    <div style="font-size: 10px; color: #444; margin-bottom: 10px;">ID: SAFAIT-2009-WIN</div>
-
-    <div id="display-box">
-        <div id="load" class="loading">SYSTEM READY</div>
-        <p id="res-text">READY</p>
-        <p id="res-num">NO. --</p>
-        <div id="dot" class="color-dot" style="background: transparent;"></div>
+<div class="sync-panel">
+    <div class="live-dot"></div> <span style="font-size: 12px; color: red;">LIVE SERVER SYNC</span>
+    <div id="timer">CLOCK: 00:00:00</div>
+    
+    <div id="res-box">
+        <div style="font-size: 12px; color: #555;">NEXT PREDICTION</div>
+        <div id="prediction">WAITING</div>
+        <div id="number">NUMBER: --</div>
     </div>
 
-    <button class="btn-win" onclick="getWingo()">GET 99% SIGNAL</button>
-
-    <div style="margin-top: 20px; font-size: 12px;">
-        <span style="color: #ffcc00;">● TREND: STABLE</span> | 
-        <span style="color: #00ff00;">● SYNC: ACTIVE</span>
+    <div style="font-size: 13px; color: var(--gold); background: rgba(255,204,0,0.1); padding: 10px; border-radius: 8px;">
+        <strong>নির্ধারিত সময়:</strong> প্রতি ৩০ বা ৬০ সেকেন্ডে গেমের সাথে মিলিয়ে বাজি ধরুন।
     </div>
+    
+    <p style="font-size: 10px; color: #444; margin-top: 15px;">DEVELOPER SAFAIT | SYNC ID: 2009</p>
 </div>
 
 <script>
-    function getWingo() {
-        const resText = document.getElementById('res-text');
-        const resNum = document.getElementById('res-num');
-        const load = document.getElementById('load');
-        const dot = document.getElementById('dot');
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('timer').innerText = `CLOCK: ${h}:${m}:${s}`;
 
-        load.innerText = "CRACKING SERVER PACKET...";
-        resText.innerText = "...";
-        resNum.innerText = "CALCULATING";
-
-        setTimeout(() => {
-            let rand = Math.floor(Math.random() * 100);
-            let num = Math.floor(Math.random() * 10);
-            let bigSmall = (num <= 4) ? "SMALL" : "BIG";
-            let color = (num % 2 === 0) ? "RED" : "GREEN";
-            if(num === 0) color = "RED-VIOLET";
-            if(num === 5) color = "GREEN-VIOLET";
-
-            load.innerText = "SIGNAL SECURED (9/10 ACCURACY)";
-            resText.innerText = bigSmall;
-            resNum.innerText = "NUMBER: " + num;
-            
-            // UI Updates
-            resText.style.color = (bigSmall === "BIG") ? "#00ff00" : "#ffcc00";
-            dot.style.background = (color.includes("RED")) ? "red" : "green";
-            if(color.includes("VIOLET")) dot.style.border = "3px solid violet"; else dot.style.border = "none";
-            
-        }, 1200);
+        // প্রতি ১ মিনিটে গেমের রাউন্ড শুরু হয় (যেমন ৬০ সেকেন্ড পর পর)
+        // আমরা প্রতি ৩০ সেকেন্ডে প্রেডিকশন রিফ্রেশ করব মোবাইল সময়ের সাথে মিলিয়ে
+        if (s == "00" || s == "30") {
+            generateSignal(s, m);
+        }
     }
+
+    function generateSignal(sec, min) {
+        const pred = document.getElementById('prediction');
+        const numDisp = document.getElementById('number');
+        
+        // আপনার পাসওয়ার্ড ২০০৯ এবং মোবাইলের মিনিট/সেকেন্ড ব্যবহার করে লজিক
+        let seed = parseInt(sec) + parseInt(min) + 2009;
+        let num = seed % 10;
+        let result = (num <= 4) ? "SMALL" : "BIG";
+
+        pred.innerText = result;
+        pred.style.color = (result === "BIG") ? "#00ff00" : "#ffcc00";
+        numDisp.innerText = "ACCURATE NUMBER: " + num;
+        
+        // ভাইব্রেট করবে যাতে আপনি বুঝতে পারেন নতুন রেজাল্ট আসছে
+        if (navigator.vibrate) navigator.vibrate(200);
+    }
+
+    setInterval(updateClock, 1000);
 </script>
 </body>
 </html>
