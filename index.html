@@ -3,99 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFAIT V69 - ULTRA BYPASS</title>
+    <title>SAFAIT V100 - ULTIMATE</title>
     <style>
         :root { --neon: #00ff41; --danger: #ff003c; --gold: #ffcc00; --bg: #000; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 10px; }
-        .panel { border: 2px solid var(--neon); border-radius: 20px; padding: 25px; background: #080808; box-shadow: 0 0 50px rgba(0, 255, 65, 0.4); max-width: 380px; margin: auto; }
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-        .nav-btn { background: #000; border: 1px solid var(--neon); color: var(--neon); padding: 12px 5px; cursor: pointer; font-size: 11px; font-weight: bold; }
-        .active { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
-        #display-main { border: 1px dashed #333; margin: 20px 0; padding: 40px 10px; min-height: 200px; display: flex; flex-direction: column; justify-content: center; }
-        #res { font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 30px var(--neon); }
-        .info-box { font-size: 15px; color: var(--gold); background: rgba(255, 204, 0, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px; border: 1px solid var(--gold); }
-        #fill { height: 5px; background: var(--neon); width: 0%; transition: width 0.1s linear; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Arial', sans-serif; text-align: center; margin: 0; padding: 10px; }
+        .terminal { border: 4px solid var(--neon); border-radius: 20px; padding: 20px; background: #050505; max-width: 400px; margin: auto; box-shadow: 0 0 30px var(--neon); }
+        .btn-box { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .game-btn { background: #000; border: 2px solid var(--neon); color: var(--neon); padding: 15px 5px; cursor: pointer; font-weight: bold; border-radius: 10px; font-size: 12px; }
+        .active { background: var(--neon); color: #000; }
+        #output-screen { background: #111; border: 2px dashed #333; height: 200px; display: flex; flex-direction: column; justify-content: center; margin: 20px 0; border-radius: 15px; }
+        #res { font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--neon); margin: 0; }
+        #prediction-btn { background: var(--danger); color: #fff; border: none; padding: 20px; width: 100%; border-radius: 50px; font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 15px rgba(255,0,60,0.4); margin-top: 10px; }
+        #prediction-btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
 
-<div class="panel">
-    <div style="font-size: 10px; text-align: left; color: #004400;" id="glitch">SECURITY_BYPASS_ACTIVE...</div>
+<div class="terminal">
+    <h2 style="color:#fff; margin-top:0;">SAFAIT MASTER PANEL</h2>
     
-    <div class="nav-grid">
-        <button id="b1" class="nav-btn active" onclick="setMode('AVIATOR')">AVIATOR.PRO</button>
-        <button id="b2" class="nav-btn" onclick="setMode('WINGO')">WINGO.X</button>
-        <button id="b3" class="nav-btn" onclick="setMode('CRAZY')">CRAZY.TIME</button>
+    <div class="btn-box">
+        <button id="b1" class="game-btn active" onclick="setMode('AVIATOR')">AVIATOR</button>
+        <button id="b2" class="game-btn" onclick="setMode('WINGO')">WINGO</button>
+        <button id="b3" class="game-btn" onclick="setMode('CRAZY')">CRAZY.T</button>
     </div>
 
-    <div id="display-main">
-        <div id="status" style="font-size: 11px; color: var(--gold); letter-spacing: 2px;">SYNCING_WITH_SERVER_2009...</div>
-        <div id="res">LOADING</div>
-        <div id="extra" class="info-box">WAITING FOR PACKET</div>
+    <div id="output-screen">
+        <div id="status" style="font-size: 12px; color: var(--gold);">STATUS: READY TO BYPASS</div>
+        <p id="res">---</p>
+        <div id="hint" style="color:#aaa; font-size:14px;">TAP BUTTON BELOW</div>
     </div>
 
-    <div style="height: 5px; background: #111; width: 100%;"><div id="fill"></div></div>
-    <div style="font-size: 12px; margin-top: 5px;">NEXT DATA: <span id="clock">0</span>s</div>
+    <button id="prediction-btn" onclick="getPrediction()">GET PREDICTION</button>
 
-    <div style="margin-top: 30px; border-top: 1px solid #222; padding-top: 15px;">
-        <div style="font-size: 32px; font-weight: 950; color: #fff; text-shadow: 0 0 15px var(--neon);">SAFAIT DEVELOPER</div>
-        <div style="font-size: 9px; color: #444; margin-top: 5px;">VERSION 69.0 | REAL-SYNC ENABLED</div>
+    <div style="margin-top: 20px; border-top: 1px solid #222; padding-top: 10px;">
+        <p style="font-size: 10px; color: #555;">ID: 2009 | BYPASS_SERVER_V100</p>
+        <h3 style="color: #fff; margin:0;">DEVELOPER SAFAIT</h3>
     </div>
 </div>
 
 <script>
     let mode = 'AVIATOR';
-    let lastS = -1;
 
     function setMode(m) {
         mode = m;
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.game-btn').forEach(b => b.classList.remove('active'));
         if(m === 'AVIATOR') document.getElementById('b1').classList.add('active');
         if(m === 'WINGO') document.getElementById('b2').classList.add('active');
         if(m === 'CRAZY') document.getElementById('b3').classList.add('active');
-        document.getElementById('res').innerText = "SYNC";
+        document.getElementById('res').innerText = "---";
+        document.getElementById('status').innerText = "MODE: " + m;
     }
 
-    setInterval(() => {
-        const now = new Date();
-        const s = now.getSeconds();
-        const cycle = 30;
-        const rem = cycle - (s % cycle);
-        
-        document.getElementById('clock').innerText = rem;
-        document.getElementById('fill').style.width = ((cycle - rem) / cycle * 100) + "%";
-
-        if (rem === 1 && lastS !== s) {
-            processV69(s, now.getMinutes());
-            lastS = s;
-        }
-    }, 100);
-
-    function processV69(s, m) {
+    function getPrediction() {
         const res = document.getElementById('res');
-        const extra = document.getElementById('extra');
         const stat = document.getElementById('status');
+        const hint = document.getElementById('hint');
         
-        let rand = Math.floor(Math.random() * 100);
-        stat.innerText = "DATA_PACKET_RECEIVED";
+        stat.innerText = "INJECTING...";
+        res.innerText = "WAIT";
+        
+        setTimeout(() => {
+            let rand = Math.floor(Math.random() * 100);
+            stat.innerText = "SUCCESSFUL BYPASS";
 
-        if (mode === 'AVIATOR') {
-            let val = (rand < 40) ? (1.15 + rand/100).toFixed(2) : (2.10 + rand/55).toFixed(2);
-            res.innerText = val + "x";
-            res.style.color = val > 2 ? "var(--neon)" : "var(--danger)";
-            extra.innerText = "TARGET: EXIT 1.50x";
-        } else if (mode === 'WINGO') {
-            let win = (rand < 50) ? "BIG" : "SMALL";
-            res.innerText = win;
-            res.style.color = (win === "BIG") ? "var(--neon)" : "var(--gold)";
-            extra.innerText = "SAFE_BET: STAKE 5% ONLY";
-        } else if (mode === 'CRAZY') {
-            let names = ["1", "2", "5", "10", "PACHINKO", "COIN FLIP", "CRAZY TIME"];
-            let pick = names[Math.floor(Math.random() * names.length)];
-            res.innerText = pick;
-            res.style.color = "var(--gold)";
-            extra.innerText = "PREDICTED RESULT: " + pick;
-        }
+            if (mode === 'AVIATOR') {
+                let val = (rand < 40) ? (1.20 + rand/100).toFixed(2) : (2.10 + rand/50).toFixed(2);
+                res.innerText = val + "x";
+                res.style.color = val > 2 ? "var(--neon)" : "var(--danger)";
+                hint.innerText = "EXIT AT 1.45x - 1.50x";
+            } else if (mode === 'WINGO') {
+                let sz = (rand < 50) ? "BIG" : "SMALL";
+                res.innerText = sz;
+                res.style.color = (sz === "BIG") ? "var(--neon)" : "var(--gold)";
+                hint.innerText = "COLOR: " + (rand % 2 === 0 ? "RED" : "GREEN");
+            } else if (mode === 'CRAZY') {
+                let names = ["1", "2", "5", "10", "COIN FLIP", "PACHINKO", "CASH HUNT", "CRAZY TIME"];
+                let win = names[rand % names.length];
+                res.innerText = win;
+                res.style.color = "#fff";
+                hint.innerText = "NEXT SEGMENT: " + win;
+            }
+        }, 800);
     }
 </script>
 </body>
