@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFAIT MATRIX-X V63</title>
+    <style>
+        :root { --neon: #00ff41; --red: #ff003c; --gold: #ffcc00; }
+        body { background: #000; color: var(--neon); font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 15px; overflow-x: hidden; }
+        .terminal { border: 2px solid var(--neon); border-radius: 15px; padding: 20px; background: rgba(0, 20, 0, 0.9); box-shadow: 0 0 50px rgba(0, 255, 65, 0.2); max-width: 400px; margin: auto; position: relative; }
+        .glitch { font-size: 10px; color: #004400; height: 30px; overflow: hidden; margin-bottom: 10px; text-align: left; }
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .nav-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 10px 5px; cursor: pointer; font-size: 10px; font-weight: bold; }
+        .active-nav { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
+        #output-box { border: 1px dashed var(--neon); padding: 30px 10px; margin: 20px 0; min-height: 120px; display: flex; flex-direction: column; justify-content: center; }
+        #prediction { font-size: 50px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--neon); }
+        .info-text { font-size: 12px; color: var(--gold); margin-top: 10px; }
+        .dev-footer { margin-top: 40px; border-top: 1px solid #111; padding-top: 20px; }
+        .dev-name { font-size: 35px; font-weight: 950; letter-spacing: 3px; color: #fff; text-shadow: 0 0 15px var(--neon); }
+        #sync-line { font-size: 10px; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="terminal">
+    <div class="glitch" id="glitch-text">INITIALIZING_SECURE_BYPASS...</div>
+    
+    <div class="nav-grid">
+        <button id="b1" class="nav-btn active-nav" onclick="setMode('AVIATOR')">AVIATOR.EXE</button>
+        <button id="b2" class="nav-btn" onclick="setMode('WINGO')">WINGO.V6</button>
+        <button id="b3" class="nav-btn" onclick="setMode('CRAZY')">CRAZY.PRO</button>
+    </div>
+
+    <div id="output-box">
+        <div id="status" style="font-size: 10px; color: var(--gold);">SYSTEM_READY_FOR_DATA</div>
+        <div id="prediction">---</div>
+        <div id="advice" class="info-text">SELECT ENGINE TO BYPASS</div>
+    </div>
+
+    <div id="sync-line">PACKET_SYNC: 100% | PASS: 2009</div>
+
+    <div class="dev-footer">
+        <div style="font-size: 10px; color: var(--neon);">SYSTEM DEVELOPED BY:</div>
+        <div class="dev-name">DEVELOPER SAFAIT</div>
+    </div>
+</div>
+
+<script>
+    let currentMode = 'AVIATOR';
+    const glitch = document.getElementById('glitch-text');
+    const pred = document.getElementById('prediction');
+    const adv = document.getElementById('advice');
+    const stat = document.getElementById('status');
+
+    // Matrix Glitch Effect
+    setInterval(() => {
+        glitch.innerText = "BYPASS_SEED_" + Math.random().toString(16).substring(2, 10) + "_SYNC_OK";
+    }, 150);
+
+    function setMode(m) {
+        currentMode = m;
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-nav'));
+        if(m === 'AVIATOR') document.getElementById('b1').classList.add('active-nav');
+        if(m === 'WINGO') document.getElementById('b2').classList.add('active-nav');
+        if(m === 'CRAZY') document.getElementById('b3').classList.add('active-nav');
+        
+        pred.innerText = "LOADING";
+        adv.innerText = "CONNECTING TO " + m + " SERVER...";
+    }
+
+    function runHackerEngine() {
+        const now = new Date();
+        const s = now.getSeconds();
+        const cycle = currentMode === 'CRAZY' ? 30 : 15;
+        const rem = cycle - (s % cycle);
+
+        if (rem === 2) {
+            stat.innerText = "DECRYPTING_SERVER_PACKET...";
+            setTimeout(processData, 800);
+        }
+    }
+
+    function processData() {
+        let rand = Math.floor(Math.random() * 100);
+        
+        if (currentMode === 'AVIATOR') {
+            let val = (rand < 40) ? (1.10 + rand/100).toFixed(2) : (1.95 + rand/40).toFixed(2);
+            pred.innerText = val + "x";
+            pred.style.color = val > 2 ? "var(--neon)" : "var(--red)";
+            adv.innerText = "TARGET_LOCK: 1.50x CASH_OUT";
+        } else if (currentMode === 'WINGO') {
+            let size = (rand < 50) ? "SMALL" : "BIG";
+            pred.innerText = size;
+            pred.style.color = size === "BIG" ? "var(--neon)" : "var(--gold)";
+            adv.innerText = "PATTERN: STABLE_ALGORITHM";
+        } else if (currentMode === 'CRAZY') {
+            let res = (rand < 60) ? "1 / 2" : (rand < 85 ? "5 / 10" : "BONUS");
+            pred.innerText = res;
+            pred.style.color = "var(--gold)";
+            adv.innerText = "ADVICE: COVER_MAIN_NUMBERS";
+        }
+        stat.innerText = "SIGNAL_CONFIRMED_SUCCESS";
+    }
+
+    setInterval(runHackerEngine, 1000);
+</script>
+</body>
+</html>
