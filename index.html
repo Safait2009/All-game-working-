@@ -3,88 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFAIT V100 - ULTIMATE</title>
+    <title>SAFAIT RECOVERY V2025</title>
     <style>
-        :root { --neon: #00ff41; --danger: #ff003c; --gold: #ffcc00; --bg: #000; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Arial', sans-serif; text-align: center; margin: 0; padding: 10px; }
-        .terminal { border: 4px solid var(--neon); border-radius: 20px; padding: 20px; background: #050505; max-width: 400px; margin: auto; box-shadow: 0 0 30px var(--neon); }
-        .btn-box { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .game-btn { background: #000; border: 2px solid var(--neon); color: var(--neon); padding: 15px 5px; cursor: pointer; font-weight: bold; border-radius: 10px; font-size: 12px; }
-        .active { background: var(--neon); color: #000; }
-        #output-screen { background: #111; border: 2px dashed #333; height: 200px; display: flex; flex-direction: column; justify-content: center; margin: 20px 0; border-radius: 15px; }
-        #res { font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--neon); margin: 0; }
-        #prediction-btn { background: var(--danger); color: #fff; border: none; padding: 20px; width: 100%; border-radius: 50px; font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 15px rgba(255,0,60,0.4); margin-top: 10px; }
-        #prediction-btn:active { transform: scale(0.95); }
+        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; }
+        .box { border: 5px solid #ff0000; border-radius: 20px; padding: 20px; max-width: 350px; margin: 50px auto; background: #111; box-shadow: 0 0 40px #ff0000; }
+        .win-display { font-size: 50px; font-weight: bold; color: #00ff00; margin: 20px 0; border: 2px solid #333; padding: 20px; border-radius: 10px; }
+        .btn { background: #ff0000; color: #fff; border: none; padding: 15px 30px; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 50px; width: 100%; box-shadow: 0 5px 0 #880000; }
+        .btn:active { transform: translateY(5px); box-shadow: none; }
+        .type-selector { display: flex; justify-content: space-around; margin-bottom: 20px; }
+        .type-selector span { cursor: pointer; padding: 5px 10px; border: 1px solid #444; border-radius: 5px; font-size: 12px; }
+        .selected { background: #00ff00; color: #000; }
     </style>
 </head>
 <body>
 
-<div class="terminal">
-    <h2 style="color:#fff; margin-top:0;">SAFAIT MASTER PANEL</h2>
+<div class="box">
+    <h2 style="color: #ff0000; margin-top: 0;">SAFAIT RECOVERY MODE</h2>
     
-    <div class="btn-box">
-        <button id="b1" class="game-btn active" onclick="setMode('AVIATOR')">AVIATOR</button>
-        <button id="b2" class="game-btn" onclick="setMode('WINGO')">WINGO</button>
-        <button id="b3" class="game-btn" onclick="setMode('CRAZY')">CRAZY.T</button>
+    <div class="type-selector">
+        <span id="t1" class="selected" onclick="select('AVIATOR')">AVIATOR</span>
+        <span id="t2" onclick="select('WINGO')">WINGO</span>
+        <span id="t3" onclick="select('CRAZY')">CRAZY.T</span>
     </div>
 
-    <div id="output-screen">
-        <div id="status" style="font-size: 12px; color: var(--gold);">STATUS: READY TO BYPASS</div>
-        <p id="res">---</p>
-        <div id="hint" style="color:#aaa; font-size:14px;">TAP BUTTON BELOW</div>
-    </div>
+    <div id="status" style="font-size: 10px; color: #888;">SERVER: CONNECTED (2009)</div>
+    <div id="result" class="win-display">READY</div>
+    <div id="advice" style="font-size: 14px; color: #ffcc00; margin-bottom: 15px;">WAIT FOR SIGNAL</div>
 
-    <button id="prediction-btn" onclick="getPrediction()">GET PREDICTION</button>
-
-    <div style="margin-top: 20px; border-top: 1px solid #222; padding-top: 10px;">
-        <p style="font-size: 10px; color: #555;">ID: 2009 | BYPASS_SERVER_V100</p>
-        <h3 style="color: #fff; margin:0;">DEVELOPER SAFAIT</h3>
-    </div>
+    <button class="btn" onclick="crackServer()">HACK NEXT ROUND</button>
+    
+    <p style="font-size: 11px; margin-top: 20px; color: #444;">ID: SAFAIT_DEVELOPER_V2025</p>
 </div>
 
 <script>
     let mode = 'AVIATOR';
-
-    function setMode(m) {
+    function select(m) {
         mode = m;
-        document.querySelectorAll('.game-btn').forEach(b => b.classList.remove('active'));
-        if(m === 'AVIATOR') document.getElementById('b1').classList.add('active');
-        if(m === 'WINGO') document.getElementById('b2').classList.add('active');
-        if(m === 'CRAZY') document.getElementById('b3').classList.add('active');
-        document.getElementById('res').innerText = "---";
-        document.getElementById('status').innerText = "MODE: " + m;
+        document.querySelectorAll('.type-selector span').forEach(s => s.classList.remove('selected'));
+        if(m==='AVIATOR') document.getElementById('t1').classList.add('selected');
+        if(m==='WINGO') document.getElementById('t2').classList.add('selected');
+        if(m==='CRAZY') document.getElementById('t3').classList.add('selected');
+        document.getElementById('result').innerText = "READY";
     }
 
-    function getPrediction() {
-        const res = document.getElementById('res');
-        const stat = document.getElementById('status');
-        const hint = document.getElementById('hint');
-        
-        stat.innerText = "INJECTING...";
-        res.innerText = "WAIT";
+    function crackServer() {
+        const res = document.getElementById('result');
+        const adv = document.getElementById('advice');
+        res.innerText = "CHORING...";
         
         setTimeout(() => {
-            let rand = Math.floor(Math.random() * 100);
-            stat.innerText = "SUCCESSFUL BYPASS";
-
-            if (mode === 'AVIATOR') {
-                let val = (rand < 40) ? (1.20 + rand/100).toFixed(2) : (2.10 + rand/50).toFixed(2);
-                res.innerText = val + "x";
-                res.style.color = val > 2 ? "var(--neon)" : "var(--danger)";
-                hint.innerText = "EXIT AT 1.45x - 1.50x";
-            } else if (mode === 'WINGO') {
-                let sz = (rand < 50) ? "BIG" : "SMALL";
-                res.innerText = sz;
-                res.style.color = (sz === "BIG") ? "var(--neon)" : "var(--gold)";
-                hint.innerText = "COLOR: " + (rand % 2 === 0 ? "RED" : "GREEN");
-            } else if (mode === 'CRAZY') {
-                let names = ["1", "2", "5", "10", "COIN FLIP", "PACHINKO", "CASH HUNT", "CRAZY TIME"];
-                let win = names[rand % names.length];
-                res.innerText = win;
-                res.style.color = "#fff";
-                hint.innerText = "NEXT SEGMENT: " + win;
+            let r = Math.random() * 100;
+            if(mode === 'AVIATOR') {
+                let v = (r < 50) ? (1.30 + (r/100)).toFixed(2) : (2.00 + (r/20)).toFixed(2);
+                res.innerText = v + "x";
+                adv.innerText = "CASH OUT: 1.40x (MUST)";
+            } else if(mode === 'WINGO') {
+                let s = (r < 50) ? "BIG" : "SMALL";
+                res.innerText = s;
+                adv.innerText = "FOLLOW TREND: 1x, 3x, 9x";
+            } else if(mode === 'CRAZY') {
+                let c = ["1", "2", "5", "10", "BONUS"][Math.floor(r % 5)];
+                res.innerText = c;
+                adv.innerText = "WAIT FOR STABLE WHEEL";
             }
-        }, 800);
+        }, 1500);
     }
 </script>
 </body>
