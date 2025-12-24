@@ -3,47 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFAIT ULTRA-SYNC V66</title>
+    <title>SAFAIT V69 - ULTRA BYPASS</title>
     <style>
         :root { --neon: #00ff41; --danger: #ff003c; --gold: #ffcc00; --bg: #000; }
         body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 10px; }
-        .terminal { border: 3px solid var(--neon); border-radius: 20px; padding: 25px; background: rgba(0, 10, 0, 0.98); box-shadow: 0 0 60px rgba(0, 255, 65, 0.4); max-width: 380px; margin: auto; }
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .nav-btn { background: #000; border: 1px solid var(--neon); color: var(--neon); padding: 12px 5px; cursor: pointer; font-size: 10px; font-weight: bold; }
-        .active { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
+        .panel { border: 2px solid var(--neon); border-radius: 20px; padding: 25px; background: #080808; box-shadow: 0 0 50px rgba(0, 255, 65, 0.4); max-width: 380px; margin: auto; }
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+        .nav-btn { background: #000; border: 1px solid var(--neon); color: var(--neon); padding: 12px 5px; cursor: pointer; font-size: 11px; font-weight: bold; }
+        .active { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
         #display-main { border: 1px dashed #333; margin: 20px 0; padding: 40px 10px; min-height: 200px; display: flex; flex-direction: column; justify-content: center; }
-        #res { font-size: 45px; font-weight: 900; color: #fff; text-shadow: 0 0 30px var(--neon); margin: 10px 0; }
-        .bonus-box { font-size: 16px; color: var(--gold); font-weight: bold; background: rgba(255, 204, 0, 0.1); padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px solid var(--gold); }
-        #timer-line { height: 5px; background: #111; margin-top: 25px; width: 100%; border-radius: 10px; overflow: hidden; }
-        #fill { height: 100%; width: 0%; background: var(--neon); transition: width 0.1s linear; }
-        .dev-footer { margin-top: 40px; border-top: 2px solid #111; padding-top: 20px; }
-        .dev-name { font-size: 35px; font-weight: 950; color: #fff; text-shadow: 0 0 20px var(--neon); letter-spacing: 3px; }
+        #res { font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 30px var(--neon); }
+        .info-box { font-size: 15px; color: var(--gold); background: rgba(255, 204, 0, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px; border: 1px solid var(--gold); }
+        #fill { height: 5px; background: var(--neon); width: 0%; transition: width 0.1s linear; }
     </style>
 </head>
 <body>
 
-<div class="terminal">
-    <div style="font-size: 9px; text-align: left; color: #004400;" id="glitch">UDP_PORT_8080_OPEN...</div>
+<div class="panel">
+    <div style="font-size: 10px; text-align: left; color: #004400;" id="glitch">SECURITY_BYPASS_ACTIVE...</div>
     
     <div class="nav-grid">
-        <button id="b1" class="nav-btn active" onclick="setMode('AVIATOR')">AVIATOR</button>
-        <button id="b2" class="nav-btn" onclick="setMode('WINGO')">WINGO</button>
+        <button id="b1" class="nav-btn active" onclick="setMode('AVIATOR')">AVIATOR.PRO</button>
+        <button id="b2" class="nav-btn" onclick="setMode('WINGO')">WINGO.X</button>
         <button id="b3" class="nav-btn" onclick="setMode('CRAZY')">CRAZY.TIME</button>
     </div>
 
     <div id="display-main">
-        <div id="status" style="font-size: 11px; color: var(--gold); letter-spacing: 2px;">INJECTING_PAYLOAD...</div>
-        <div id="res">READY</div>
-        <div id="extra-info"></div>
+        <div id="status" style="font-size: 11px; color: var(--gold); letter-spacing: 2px;">SYNCING_WITH_SERVER_2009...</div>
+        <div id="res">LOADING</div>
+        <div id="extra" class="info-box">WAITING FOR PACKET</div>
     </div>
 
-    <div id="timer-line"><div id="fill"></div></div>
-    <div style="font-size: 11px; margin-top: 8px; color: #444;">SYNC_REFRESH: <span id="clock">0</span>s</div>
+    <div style="height: 5px; background: #111; width: 100%;"><div id="fill"></div></div>
+    <div style="font-size: 12px; margin-top: 5px;">NEXT DATA: <span id="clock">0</span>s</div>
 
-    <div class="dev-footer">
-        <div style="font-size: 10px; color: var(--neon);">SYSTEM DEVELOPED BY:</div>
-        <div class="dev-name">DEVELOPER SAFAIT</div>
-        <div style="font-size: 9px; color: #222; margin-top: 8px;">ID: 2009 | REAL-TIME-WINS | VER: 66.0</div>
+    <div style="margin-top: 30px; border-top: 1px solid #222; padding-top: 15px;">
+        <div style="font-size: 32px; font-weight: 950; color: #fff; text-shadow: 0 0 15px var(--neon);">SAFAIT DEVELOPER</div>
+        <div style="font-size: 9px; color: #444; margin-top: 5px;">VERSION 69.0 | REAL-SYNC ENABLED</div>
     </div>
 </div>
 
@@ -57,59 +53,48 @@
         if(m === 'AVIATOR') document.getElementById('b1').classList.add('active');
         if(m === 'WINGO') document.getElementById('b2').classList.add('active');
         if(m === 'CRAZY') document.getElementById('b3').classList.add('active');
-        document.getElementById('res').innerText = "SYNCING";
-        document.getElementById('extra-info').innerHTML = "";
+        document.getElementById('res').innerText = "SYNC";
     }
 
     setInterval(() => {
         const now = new Date();
         const s = now.getSeconds();
-        const cycle = 30; 
+        const cycle = 30;
         const rem = cycle - (s % cycle);
         
         document.getElementById('clock').innerText = rem;
         document.getElementById('fill').style.width = ((cycle - rem) / cycle * 100) + "%";
-        document.getElementById('glitch').innerText = "PACKET_" + Math.random().toString(16).toUpperCase().substring(2, 12);
 
         if (rem === 1 && lastS !== s) {
-            processResult(s, now.getMinutes());
+            processV69(s, now.getMinutes());
             lastS = s;
         }
     }, 100);
 
-    function processResult(s, m) {
+    function processV69(s, m) {
         const res = document.getElementById('res');
-        const extra = document.getElementById('extra-info');
+        const extra = document.getElementById('extra');
         const stat = document.getElementById('status');
         
-        let seed = (m * 60) + s;
-        let rand = (seed * 157 + 37) % 100;
-
-        stat.innerText = "SERVER_SYNC_SUCCESS";
+        let rand = Math.floor(Math.random() * 100);
+        stat.innerText = "DATA_PACKET_RECEIVED";
 
         if (mode === 'AVIATOR') {
-            let val = (rand < 38) ? (1.12 + rand/100).toFixed(2) : (2.15 + rand/40).toFixed(2);
+            let val = (rand < 40) ? (1.15 + rand/100).toFixed(2) : (2.10 + rand/55).toFixed(2);
             res.innerText = val + "x";
             res.style.color = val > 2 ? "var(--neon)" : "var(--danger)";
-            extra.innerHTML = "<div class='bonus-box'>EXIT TARGET: 1.50x</div>";
+            extra.innerText = "TARGET: EXIT 1.50x";
         } else if (mode === 'WINGO') {
-            let num = Math.floor(Math.random() * 10);
-            let size = (num <= 4) ? "SMALL" : "BIG";
-            res.innerText = "NUM: " + num;
-            res.style.color = (size === "BIG") ? "var(--neon)" : "var(--gold)";
-            extra.innerHTML = "<div class='bonus-box'>SIZE: " + size + " | COLOR: " + (num % 2 === 0 ? "RED" : "GREEN") + "</div>";
+            let win = (rand < 50) ? "BIG" : "SMALL";
+            res.innerText = win;
+            res.style.color = (win === "BIG") ? "var(--neon)" : "var(--gold)";
+            extra.innerText = "SAFE_BET: STAKE 5% ONLY";
         } else if (mode === 'CRAZY') {
-            let names = ["1 (WHITE)", "2 (YELLOW)", "5 (PINK)", "10 (PURPLE)", "COIN FLIP", "PACHINKO", "CASH HUNT", "CRAZY TIME"];
+            let names = ["1", "2", "5", "10", "PACHINKO", "COIN FLIP", "CRAZY TIME"];
             let pick = names[Math.floor(Math.random() * names.length)];
             res.innerText = pick;
             res.style.color = "var(--gold)";
-            
-            if(pick.includes(" ")) { 
-                let zones = ["RED-SIDE", "BLUE-SIDE", "GREEN-SIDE"];
-                extra.innerHTML = "<div class='bonus-box'>TARGET: " + zones[Math.floor(Math.random() * 3)] + "</div>";
-            } else {
-                extra.innerHTML = "<div class='bonus-box'>BET ON 1 & 2 FOR SAFETY</div>";
-            }
+            extra.innerText = "PREDICTED RESULT: " + pick;
         }
     }
 </script>
